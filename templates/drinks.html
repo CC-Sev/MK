@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Drinks</title>
+        <style>
+
+            body {
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                background-color: #f0f0f0;
+                margin: 0;
+                padding: 0;
+            }
+    
+            header {
+                font-family: 'Brush Script MT', cursive;
+                background: linear-gradient(109.6deg, rgb(6, 2, 2) 32.4%, rgb(137, 30, 47) 98.8%);              
+                color: #fff;
+                text-align: center;
+                padding: 20px;
+                width: 100%;
+            }
+    
+            h1 {
+                font-size: 2.5rem;
+                margin: 0;
+            }
+    
+            nav {
+                background-color: #333;
+                color: #fff;
+                text-align: center;
+                padding: 10px 0;
+            }
+    
+            nav a {
+                color: #fff;
+                text-decoration: none;
+                padding: 0 15px;
+            }
+    
+            nav a:hover {
+                background-color: #555;
+            }
+
+            .slideshow_image {
+                height: 600px;
+                width: 1200px;
+                display: block;
+                margin: auto;
+            }
+
+            .info_box {
+                width: 100%;
+                background-color: #000;
+                color: white;
+                margin: 0;
+                padding: 0;
+                line-height: 1;
+                display: flex;
+                justify-content: space-between;
+            }
+            
+            .left_column {
+                flex-grow: 1; 
+                margin-left: 300px; 
+            }
+            
+            .right_column {
+                flex-grow: 1;
+            }
+            
+            .social_media img {
+                margin-right: 10px; 
+            }
+            
+            .contact_info {
+                margin-top: 20px;
+            }
+
+            .drink_box {
+                width: auto;
+                margin-bottom: 20px;
+                margin-left: 140px;
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: flex-start;
+            }
+            
+            .drink_item {
+                width: calc(30% - 20px); /* 30% width with margins subtracted */
+                height: 150px;
+                margin: 0 10px 20px; /* Adjust margins as needed */
+                background: linear-gradient(to bottom, rgba(255,255,255,0.15) 0%, rgba(0,0,0,0.15) 100%), radial-gradient(at top center, rgba(255,255,255,0.40) 0%, rgba(0,0,0,0.40) 120%) #989898;
+                border-radius: 25px;
+                display: flex;
+                flex-direction: row;
+            }
+            
+            @media (max-width: 768px) {
+                .drink_item {
+                    width: calc(50% - 20px); /* 50% width with margins subtracted for smaller screens */
+                }
+            }
+            
+            @media (max-width: 576px) {
+                .drink_item {
+                    width: calc(100% - 20px); /* 100% width with margins subtracted for mobile screens */
+                }
+            }            
+
+            .drink_item img {
+                width: 30%;
+                height: auto;
+                border-top-right-radius: 25px;
+                border-bottom-right-radius: 25px;
+                object-fit: cover; 
+            }
+            
+            .details {
+                width: 70%;
+                display: flex;
+                flex-direction: column;
+                margin: 10px;
+                color: white;
+                flex: 1;
+                margin-bottom: 30px;
+            }
+            
+            .details p {
+                margin: 0; /* Remove default margin */
+            }
+
+            .description-price {
+                display: flex;
+                align-items: center; /* Align items vertically */
+            }
+            
+            .price {
+                font-size: 0.75rem;
+                margin-left: auto;
+            }
+            
+            .description {
+                font-size: 0.75rem;
+                max-width: 100px; /* Limit description width */
+                overflow: hidden;
+                text-overflow: ellipsis; /* Add ellipsis for truncated text */
+                white-space: nowrap; /* Prevent text from wrapping */
+            }
+
+            .drink_name {
+                font-size: 1.25rem;
+                font-family: "Brush Script MT", cursive, bold;
+                white-space: nowrap; /* Prevent text from wrapping */
+                max-width: 200px;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                margin-top: 10px;
+            }
+
+            #overlay {
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+                z-index: 999; /* Ensure the overlay is on top of other elements */
+                justify-content: center;
+                align-items: center;
+            }
+            
+            #white-box {
+                background-color: white;
+                width: 400px; 
+                height: 600px; 
+                border-radius: 25px;
+                border: 2px solid rgb(218,165,32);
+                padding: 20px; 
+                text-align: center; 
+                margin: 0;
+            }
+
+            #white-box .drink_name{
+                width: 100%;
+                overflow: visible;
+                text-overflow: initial;
+                white-space: normal;
+            }
+
+        </style>
+    </head>
+
+    <body >
+        <header style="text-align: center; padding: 20px 0; font-family: 'Brush Script MT', cursive; font-size: 3rem;">
+            Malevolent Kitchen
+        </header>
+    
+        <nav>
+            <a href="{{url_for('home')}}">Home</a>
+            <a href="{{url_for('food')}}">Food</a>
+            <a href="{{url_for('drinks')}}">Drinks</a>
+            <a href="{{url_for('about')}}">About</a>
+            <a href="{{url_for('order')}}">Order</a>
+            <a href="{{url_for('reserve')}}">Reserve</a>
+        </nav>
+
+        <h1 style="margin-left: 150px;">Signture Cocktails</h1>
+        {% if cocktail_items %}
+            <div class="drink_box">
+                {% for cocktail in cocktail_items %}
+                    <div class="drink_item" onclick="showBox('{{ cocktail.name }}', '{{ cocktail.description }}', '{{ cocktail.price }}', '{{ url_for('get_cocktail_image', item_id=cocktail.id) }}')">
+                        <div class="details">
+                            <div class="drink_name">
+                                {{ cocktail.name }}
+                            </div>
+                            <div class="description-price">
+                                <p class="description">{{ cocktail.description }}</p>
+                                <p class="price">${{ cocktail.price }}</p>
+                            </div>
+                        </div>
+                        <img src="{{ url_for('get_cocktail_image', item_id=cocktail.id) }}">
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p>No cocktail items available.</p>
+        {% endif %}
+
+        <h1 style="margin-left: 150px;">Sake</h1>
+        {% if sake_items %}
+            <div class="drink_box">
+                {% for sake in sake_items %}
+                    <div class="drink_item" onclick="showBox('{{ sake.name }}', '{{ sake.description }}', '{{ sake.price }}', '{{ url_for('get_sake_image', item_id=sake.id) }}')">
+                        <div class="details">
+                            <div class="drink_name">
+                                {{ sake.name }}
+                            </div>
+                            <div class="description-price">
+                                <p class="description">{{ sake.description }}</p>
+                                <p class="price">${{ sake.price }}</p>
+                            </div>
+                        </div>
+                        <img src="{{ url_for('get_sake_image', item_id=sake.id) }}">
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p>No non_alcohol items available.</p>
+        {% endif %}
+
+        <h1 style="margin-left: 150px;">Non-Alcohol</h1>
+        {% if non_alcohol_items %}
+            <div class="drink_box">
+                {% for non_alcohol in non_alcohol_items %}
+                    <div class="drink_item" onclick="showBox('{{ non_alcohol.name }}', '{{ non_alcohol.description }}', '{{ non_alcohol.price }}', '{{ url_for('get_non_alcohol_image', item_id=non_alcohol.id) }}')">
+                        <div class="details">
+                            <div class="drink_name">
+                                {{ non_alcohol.name }}
+                            </div>
+                            <div class="description-price">
+                                <p class="description">{{ non_alcohol.description or ''}}</p>
+                                <p class="price">${{ non_alcohol.price }}</p>
+                            </div>
+                        </div>
+                        <img src="{{ url_for('get_non_alcohol_image', item_id=non_alcohol.id) }}">
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p>No non_alcohol items available.</p>
+        {% endif %}
+
+        <div id="overlay" click="hideBox(event)">
+            <div id="white-box">
+                <!--populated by javascript-->
+            </div>
+        </div>
+           
+        
+        <script src= "{{ url_for('static', filename='drinks_toggle_overlay.js') }}"> </script>
+
+        <div class="info_box">
+
+            <div class="left_column">
+                <h1 style="text-decoration: underline;">Follow us</h1>
+                <div class="social_media">
+                    <img src="{{ url_for('static', filename='images/twitter.jpeg') }} " height = "100" width = "100">
+                    <img src="{{ url_for('static', filename='images/instagram.jpg') }} " height = "100" width = "100">
+                    <img src="{{ url_for('static', filename='images/facebook.jpeg') }} " height = "100" width = "100">
+                </div>
+            </div>
+
+            <div class="right_column">
+                <h2 style="font-family: 'Brush Script MT', cursive; text-decoration: underline; font-size: 3rem;">M.K</h2>
+                <div class="contact_info">
+                    <p style="text-decoration: underline;">Ontario, CA 91764</p>
+                    <p style="text-decoration: underline;">(951)666-4200</p>
+                    <p style="text-decoration: underline;">MK@gmail.com</p>
+                    <p style="margin-top: 10px; font-weight:bold;">Sunday - Thursday:</p>
+                    <p>11:00 AM - 10:00 PM</p>
+                    <p style="margin-top: 10px; font-weight:bold;">Friday - Saturday:</p>
+                    <p>11:00 AM - 11:00 PM</p>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

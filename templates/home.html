@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>HomePage</title>
+        <style>
+
+            body {
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                background-color: #f0f0f0;
+                margin: 0;
+                padding: 0;
+            }
+    
+            header {
+                font-family: 'Brush Script MT', cursive;
+                background: linear-gradient(109.6deg, rgb(6, 2, 2) 32.4%, rgb(137, 30, 47) 98.8%);
+                color: #fff;
+                text-align: center;
+                padding: 20px 0;
+            }
+    
+            h1 {
+                font-size: 2.5rem;
+                margin: 0;
+            }
+    
+            nav {
+                background-color: #333;
+                color: #fff;
+                text-align: center;
+                padding: 10px 0;
+            }
+    
+            nav a {
+                color: #fff;
+                text-decoration: none;
+                padding: 0 15px;
+            }
+    
+            nav a:hover {
+                background-color: #555;
+            }
+
+            .slideshow_image {
+                height: 600px;
+                width: 1200px;
+                display: block;
+                margin: auto;
+            }
+
+            .info_box {
+                width: 100%;
+                background-color: #000;
+                color: white;
+                margin: 0;
+                padding: 0;
+                line-height: 1;
+                display: flex;
+                justify-content: space-between;
+            }
+            
+            .left_column {
+                flex-grow: 1; /* Allow column to grow to fill space */
+                margin-left: 300px; /* Add spacing between columns */
+            }
+            
+            .right_column {
+                flex-grow: 1; /* Allow column to grow to fill space */
+            }
+            
+            .social_media img {
+                margin-right: 10px; /* Add spacing between social media icons */
+            }
+            
+            .contact_info {
+                margin-top: 20px; /* Add spacing between contact info and heading */
+            }
+        </style>
+    </head>
+
+    <body >
+        <header style="background-color: #000; color: #fff; text-align: center; padding: 20px 0; font-family: 'Brush Script MT', cursive; font-size: 3rem;">
+            Malevolent Kitchen
+        </header>
+    
+        <nav>
+            <a href="{{url_for('home')}}">Home</a>
+            <a href="{{url_for('food')}}">Food</a>
+            <a href="{{url_for('drinks')}}">Drinks</a>
+            <a href="{{url_for('about')}}">About</a>
+            <a href="{{url_for('order')}}">Order</a>
+            <a href="{{url_for('reserve')}}">Reserve</a>
+        </nav>
+
+        <img class="slideshow_image" src="{{ url_for('static', filename='images/MalevolentKitchen.jpeg') }}" alt="slideshow_image1">
+        <img class="slideshow_image" src="{{ url_for('static', filename='images/sukuna_hand_seal.jpg') }}" alt="slideshow_image2">
+        <img class="slideshow_image" src="{{ url_for('static', filename='images/Dagon_hand_seal.jpg') }}" alt="slideshow_image3">
+        <img class="slideshow_image" src="{{ url_for('static', filename='images/mahito_hand_seal.jpeg') }}" alt="slideshow_image4">
+        <img class="slideshow_image" src="{{ url_for('static', filename='images/choso_hand_seal.jpeg') }}" alt="slideshow_image5">
+        <img class="slideshow_image" src="{{ url_for('static', filename='images/megumi_hand_seal.jpeg') }}" alt="slideshow_image6">
+        <img class="slideshow_image" src="{{ url_for('static', filename='images/jogo_hand_seal.jpeg') }}" alt="slideshow_image7">
+        <img class="slideshow_image" src="{{ url_for('static', filename='images/gojo_hand_seal.jpg') }}" alt="slideshow_image8">
+        <img class="slideshow_image" src="{{ url_for('static', filename='images/MK2.jpg') }}" alt="slideshow_image9">
+
+        <script src="{{ url_for('static', filename='slideshow.js') }}"></script>
+
+        <div>
+            <img src="{{ url_for('static', filename='images/MK_food.jpg')}}" width = "100%">
+        <d/div>
+
+        <div class="info_box">
+
+            <div class="left_column">
+                <h1 style="text-decoration: underline;">Follow us</h1>
+                <div class="social_media">
+                    <img src="{{ url_for('static', filename='images/twitter.jpeg') }} " height = "100" width = "100">
+                    <img src="{{ url_for('static', filename='images/instagram.jpg') }} " height = "100" width = "100">
+                    <img src="{{ url_for('static', filename='images/facebook.jpeg') }} " height = "100" width = "100">
+                </div>
+            </div>
+
+            <div class="right_column">
+                <h2 style="font-family: 'Brush Script MT', cursive; text-decoration: underline; font-size: 3rem;">M.K</h2>
+                <div class="contact_info">
+                    <p style="text-decoration: underline;">Ontario, CA 91764</p>
+                    <p style="text-decoration: underline;">(951)666-4200</p>
+                    <p style="text-decoration: underline;">MK@gmail.com</p>
+                    <p style="margin-top: 10px; font-weight:bold;">Sunday - Thursday:</p>
+                    <p>11:00 AM - 10:00 PM</p>
+                    <p style="margin-top: 10px; font-weight:bold;">Friday - Saturday:</p>
+                    <p>11:00 AM - 11:00 PM</p>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

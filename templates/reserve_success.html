@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>HomePage</title>
+        <style>
+
+            body {
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                background-color: #f0f0f0;
+                margin: 0;
+                padding: 0;
+            }
+    
+            header {
+                font-family: 'Brush Script MT', cursive;
+                background: linear-gradient(109.6deg, rgb(6, 2, 2) 32.4%, rgb(137, 30, 47) 98.8%);                color: #fff;
+                text-align: center;
+                padding: 20px 0;
+            }
+    
+            h1 {
+                font-size: 2.5rem;
+                margin: 0;
+            }
+    
+            nav {
+                background-color: #333;
+                color: #fff;
+                text-align: center;
+                padding: 10px 0;
+            }
+    
+            nav a {
+                color: #fff;
+                text-decoration: none;
+                padding: 0 15px;
+            }
+    
+            nav a:hover {
+                background-color: #555;
+            }
+
+            .slideshow_image {
+                height: 600px;
+                width: 1200px;
+                display: block;
+                margin: auto;
+            }
+
+            .info_box {
+                width: 100%;
+                background-color: #000;
+                color: white;
+                margin: 0;
+                padding: 0;
+                line-height: 1;
+                display: flex;
+                justify-content: space-between;
+            }
+            
+            .left_column {
+                flex-grow: 1; /* Allow column to grow to fill space */
+                margin-left: 300px; /* Add spacing between columns */
+            }
+            
+            .right_column {
+                flex-grow: 1; /* Allow column to grow to fill space */
+            }
+            
+            .social_media img {
+                margin-right: 10px; /* Add spacing between social media icons */
+            }
+            
+            .contact_info {
+                margin-top: 20px; /* Add spacing between contact info and heading */
+            }
+
+            .reserve_box {
+                background: linear-gradient(177.9deg, rgb(58, 62, 88) 3.6%, rgb(119, 127, 148) 105.8%);
+                color: white;
+                width: 400px;
+                height: 300px;
+                margin: auto;
+                display: flex;
+                padding: 25px;
+                border-radius: 10px;
+                margin-bottom: 10px;
+                margin-top: 10px;
+                flex-direction: column;
+            }
+
+            .customer_name{
+                margin-top: 30px;
+                color: gold;
+                margin-left: 80px;
+            }
+
+            .customer_name_box{
+                width: 250px;
+                margin-bottom: 20px;
+                border-bottom: 2px solid black;
+                color: white;
+            }
+
+            #input_name{
+
+            }
+
+            .customer_phone_number{
+                color: gold;
+                margin-right: 40px;
+                margin-left: 80px;
+            }
+
+            .customer_phone_number_box{
+                width: 250px;
+                margin-bottom: 20px;
+                border-bottom: 2px solid black;
+                color: white;
+            }
+
+            #input_phone_number{
+
+            }
+
+            .customer_email{
+                color: gold;
+                margin-left: 80px;
+                font-size: 1rem;
+            }
+
+            .customer_email_box{
+                width: 250px;
+                margin-bottom: 20px;
+                border-bottom: 2px solid black;
+                color: white;
+
+            }
+
+            #input_email{
+
+            }
+
+            .transparent-background {
+                background-color: transparent; /* Make the background transparent */
+                border: none; /* Remove the border */
+                color: white;
+                width: 200px;
+                padding:10px;
+            }
+
+            .submit_button{
+                width:75px;
+                height:50px;
+                background: linear-gradient(to bottom, rgba(255,255,255,0.15) 0%, rgba(0,0,0,0.15) 100%), radial-gradient(at top center, rgba(255,255,255,0.40) 0%, rgba(0,0,0,0.40) 120%) #989898;
+                margin-left: 170px;
+            }
+
+        </style>
+    </head>
+
+    <body >
+        <header style="background-color: #000; color: #fff; text-align: center; padding: 20px 0; font-family: 'Brush Script MT', cursive; font-size: 3rem;">
+            Malevolent Kitchen
+        </header>
+    
+        <nav>
+            <a href="{{url_for('home')}}">Home</a>
+            <a href="{{url_for('food')}}">Food</a>
+            <a href="{{url_for('drinks')}}">Drinks</a>
+            <a href="{{url_for('about')}}">About</a>
+            <a href="{{url_for('order')}}">Order</a>
+            <a href="{{url_for('reserve')}}">Reserve</a>
+        </nav>
+
+        <div>Success!</div>
+
+
+        <div class="info_box">
+
+            <div class="left_column">
+                <h1 style="text-decoration: underline;">Follow us</h1>
+                <div class="social_media">
+                    <img src="{{ url_for('static', filename='images/twitter.jpeg') }} " height = "100" width = "100">
+                    <img src="{{ url_for('static', filename='images/instagram.jpg') }} " height = "100" width = "100">
+                    <img src="{{ url_for('static', filename='images/facebook.jpeg') }} " height = "100" width = "100">
+                </div>
+            </div>
+
+            <div class="right_column">
+                <h2 style="font-family: 'Brush Script MT', cursive; text-decoration: underline; font-size: 3rem;">M.K</h2>
+                <div class="contact_info">
+                    <p style="text-decoration: underline;">Ontario, CA 91764</p>
+                    <p style="text-decoration: underline;">(951)666-4200</p>
+                    <p style="text-decoration: underline;">MK@gmail.com</p>
+                    <p style="margin-top: 10px; font-weight:bold;">Sunday - Thursday:</p>
+                    <p>11:00 AM - 10:00 PM</p>
+                    <p style="margin-top: 10px; font-weight:bold;">Friday - Saturday:</p>
+                    <p>11:00 AM - 11:00 PM</p>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
