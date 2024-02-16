@@ -22,7 +22,8 @@ for row in rows:
         "id": row[0],
         "name": row[1],
         "description": row[2],
-        "price": "{:.2f}".format(float(row[3]))
+        "price": "{:.2f}".format(float(row[3])),
+        "image_id": row[4]
         }
     result.append(row_dict)
         

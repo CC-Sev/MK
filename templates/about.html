@@ -12,6 +12,12 @@
             padding: 0;
         }
 
+        .background {
+            background-image: url('{{ url_for('static', filename='images/backdrop1.jpeg') }}');
+            background-size: cover;
+            padding: 20px;
+        }
+
         header {
             font-family: 'Brush Script MT', cursive;
             background: linear-gradient(109.6deg, rgb(6, 2, 2) 32.4%, rgb(137, 30, 47) 98.8%);
@@ -47,7 +53,7 @@
             margin: 20px auto;
             padding: 0 20px;
         }
-        .spell {
+        .item {
             display: flex;
             flex-direction: column; /* Stack elements vertically */
             background-color: #1c1c1c;
@@ -58,18 +64,18 @@
             color: #fff;
         }
         
-        .spell h2 {
+        .item h2 {
             color: #ff0000;
             margin-top: 0;
             margin-bottom: 10px; /* Add space between header and paragraph */
         }
         
-        .spell p {
+        .item p {
             margin-bottom: 10px; /* Add space between paragraph and image */
             margin-right: 20px;
         }
         
-        .spell img {
+        .item img {
             max-width: 100%; /* Make sure the image doesn't exceed the container width */
             height: auto;
         }
@@ -78,6 +84,7 @@
             display: flex;
             flex-direction: column;
             flex: 3; /* Take up 60% of the width */
+            width: 400px;
         }
         
         .content p {
@@ -90,8 +97,7 @@
             max-width: 40%; /* Limit image width to 40% */
         }
 
-
-        footer {
+        .footer {
             background-color: #333;
             color: #fff;
             text-align: center;
@@ -100,6 +106,57 @@
             bottom: 0;
             width: 100%;
         }
+        .info_box {
+            width: 100%;
+            background-color: #000;
+            color: white;
+            margin: 0;
+            padding: 0;
+            line-height: 1;
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .left_column {
+            flex-grow: 1; /* Allow column to grow to fill space */
+            margin-left: 300px; /* Add spacing between columns */
+        }
+        
+        .right_column {
+            flex-grow: 1; /* Allow column to grow to fill space */
+        }
+        
+        .social_media img {
+            margin-right: 10px; /* Add spacing between social media icons */
+        }
+        
+        .contact_info {
+            margin-top: 20px; /* Add spacing between contact info and heading */
+        }
+
+        .bio_box, .aya_box, .richie_box {
+            width: 800px;
+            height: 100%;
+            background-color: #f0f0f0; 
+            padding: 20px;
+            margin: 0 auto;
+            overflow: hidden;
+            display: flex; 
+            align-items: center;
+            left: absolute; 
+        }
+        
+        .bio_image, .aya_image, .richie_image {
+            width: 300px;
+            height: 400px;
+            margin-right: 20px; /* Add margin between the image and content */
+        }
+        
+        .bio_content, .aya_content, .richie_content{
+            flex: 1; /* Allow content to grow and fill remaining space */
+            font-size: 0.75rem;
+        }
+
     </style>
 </head>
 
@@ -118,45 +175,78 @@
         <a href="{{url_for('reserve')}}">Reserve</a>
     </nav>
 
-    <h2 style = "margin-left: 30px;">Laqaumie Bond-Teves (Q)</h2>
+    <div class="background">
+        <div class="bio_box">
+            <img src="{{ url_for('static', filename='images/Sexy_Q.jpg') }}" class="bio_image" alt="bio_image1">  
+            <img src="{{ url_for('static', filename='images/Q_at_Gym.jpg') }}" class="bio_image" alt="bio_image2">  
+            <img src="{{ url_for('static', filename='images/Q_with_Beer.jpg') }}" class="bio_image" alt="bio_image3">  
+            <div class="bio_content">
+                <h2>Laqaumie Bond-Teves (Q)</h2>
+                <h3>Meet the Chef</h3>
+                <p>Chef Q, a native of California, discovered his passion for cooking at an early age. Growing up in a family that cherished food, he spent countless hours in the kitchen experimenting with flavors and techniques. His culinary journey formally began when he couldn't live up to his mother's standards of cooking.</p>
+                <p>Throughout his life, Chef Q has continued to learn and grow his culinary arts by cooking for the Teves family. His style is a fusion of Californian freshness with international influences, drawing inspiration from the various cultures he discovers of his friends and family.</p>
+                <p>Outside of the kitchen, Chef Q leads an active lifestyle. He is an avid fitness enthusiast, dedicating time to weightlifting, running, and Haki training to maintain a healthy balance between body and mind. His dedication to fitness not only fuels his creativity in the kitchen but also reflects his commitment to overall well-being.</p>
+                <p>In his leisure time, Chef Q indulges in his love for anime and beer. He finds solace in immersing himself in captivating anime series, appreciating the artistry and storytelling woven into each episode. Accompanied by a cold beer, he enjoys relaxing evenings at home, unwinding from the demands of his culinary endeavors.</p>
+                <p>Chef Q's passion for cooking, commitment to fitness, and appreciation for leisure pursuits reflect a multifaceted individual who finds joy in both the creative process and the simple pleasures of life in California's vibrant culinary scene.</p>
+            </div>
+        </div>
 
-    <img src="{{url_for('static', filename =  'images/Sexy_Q.jpg')}}" style="float: right; margin-left: 10px;" height="400" width="500">
+        <div class="bio_box">
+            <div class="bio_content">
+                <h2>Aliya <del>Bond</del>-Teves (Aya)</h2>
+                <h3>The Caretaker</h3>
+                <p>Aliyah is a spirited and compassionate nurse, radiating warmth wherever she goes. Despite her petite stature, she exudes an undeniable charm that lights up any room. Her endearing personality stems from her genuine love for people and her unwavering dedication to her profession.</p>
+                <p>One of the delightful quirks about Aliyah is her close friendship with Leslie, who has an equally eccentric personality. Their dynamic friendship adds a touch of humor and unpredictability to their everyday interactions, making them a memorable duo. They're weird, but memorable.</p>
+                <p>Aliyah's love for culinary delights extends to Chef Q's cooking, which she wholeheartedly adores. She shares Chef Q's passion for exploring diverse flavors and cuisines, often swapping stories and recommendations with him whenever she craves something.</p>
+                <p>In her leisure time, Aliyah indulges in her love for anime, finding joy and inspiration in the captivating storytelling and imaginative worlds depicted in these animated series. However, she’s always tired and makes Q wait to watch latest episode until the very last minute.</p>
+                <p>With her vibrant personality, genuine affection for others, and zest for life, Aliyah embodies the essence of joy, love, and camaraderie in both her personal and professional endeavors.</p>
+            </div>
+            <img src="{{ url_for('static', filename='images/aya1.jpg') }}" class="aya_image" alt="aya_image1">  
+            <img src="{{ url_for('static', filename='images/aya2.jpg') }}" class="aya_image" alt="aya_image2">  
+            <img src="{{ url_for('static', filename='images/aya3.jpg') }}" class="aya_image" alt="aya_image3"> 
+        </div>
 
-    <div style = "margin-left: 30px;">
-        <h3>Meet the Chef</h3>
-        <p>Chef Q, a native of California, discovered his passion for cooking at an early age. Growing up in a family that cherished food, he spent countless hours in the kitchen experimenting with flavors and techniques. His culinary journey formally began when he couldn't live up to his mother's standards of cooking.</p>
-        <p>Throughout his life, Chef Q has continued to learn and grow his culinary arts by cooking for the Teves family. His style is a fusion of Californian freshness with international influences, drawing inspiration from the various cultures he discovers of his friends and family.</p>
-        <p>Outside of the kitchen, Chef Q leads an active lifestyle. He is an avid fitness enthusiast, dedicating time to weightlifting, running, and Haki training to maintain a healthy balance between body and mind. His dedication to fitness not only fuels his creativity in the kitchen but also reflects his commitment to overall well-being.</p>
-        <p>In his leisure time, Chef Q indulges in his love for anime and beer. He finds solace in immersing himself in captivating anime series, appreciating the artistry and storytelling woven into each episode. Accompanied by a cold beer, he enjoys relaxing evenings at home, unwinding from the demands of his culinary endeavors.</p>
-        <p>Chef Q's passion for cooking, commitment to fitness, and appreciation for leisure pursuits reflect a multifaceted individual who finds joy in both the creative process and the simple pleasures of life in California's vibrant culinary scene.</p>
-        <div style="clear: both;"></div> <!-- Clear the float -->
-    </div>
-
-    <div class="content">
-        <h1 class="spell" style = "margin-top: 10px;">MUST TRY</h1>
-        <div class="spell">
-            <h2>Beans</h2>
-            <p></p>
-            <p>Inspired by his mother, this was first dish Q was taught to made. Beans are renowned for their delicious taste and versatility in culinary applications. They offer a rich, earthy flavor that pairs well with a variety of seasonings and ingredients. Q has not reached his mother's expectations as of yet, but he'll get there someday. When he finally masters the basics.</p>
-            <img src="{{url_for('static', filename = 'images/beans.jpeg')}}" height="300" width="400">
+        <div class="richie_box">
+            <img src="{{ url_for('static', filename='images/richie1.jpg') }}" class="richie_image" alt="richie_image1">  
+            <img src="{{ url_for('static', filename='images/richie2.jpg') }}" class="richie_image" alt="richie_image2">  
+            <img src="{{ url_for('static', filename='images/richie3.jpg') }}" class="richie_image" alt="richie_image3"> 
+            <div class="richie_content">
+                <h2>Richard Pomplona Teves (Clown)</h2>
+                <h3>The Promoter</h3>
+                <p>Richard is a multifaceted individual who wears many hats with ease and grace. As a seasoned nurse, nurse practitioner, and esteemed professor of mental health, he embodies the epitome of success and dedication in his career.</p>
+                <p>Driven by a relentless work ethic and a passion for making a difference, Richard is known for his unwavering commitment to his patients, students, and the field of mental health. His relentless pursuit of excellence sets him apart as a respected leader and mentor in his profession.</p>
+                <p>Beyond his professional achievements, Richard embraces life with an infectious enthusiasm, seizing every opportunity to live life to the fullest. He is the heart and soul of his family, often taking on the role of the promoter, orchestrating gatherings, parties, and events that bring loved ones together.</p>
+                <p>Richard's jovial nature and playful spirit make him the life of the party, earning him the endearing title of "our clown." His witty humor and ability to lighten the mood are cherished by family and friends alike, creating cherished memories and moments of laughter that endure a lifetime.</p>
+                <p>Despite his vibrant and outgoing personality, Richard's genuine warmth and compassion shine through in everything he does. He is a pillar of strength and support for those around him, offering comfort, guidance, and laughter in times of need.</p>
+            </div>
         </div>
     </div>
-    <div class="content">
-        <div class="spell">
-            <h2>Cookies (Mixed Assortment)</h2>
-            <p>What is food without a little dessert? Cookies are a great treat after a meal. Q's cookies are the best to satisfy a sweet tooth. Chocolate, snickerdoodle, and peanut butter, you name it. Q can make flavor for any cookie, just as long his girlfriend, Aya, can pay attention long enough to save them from burning.</p>
-            <img src="{{url_for('static', filename = 'images/cookies.jpg')}}" height="300" width="400">
+
+    <script src="{{ url_for('static', filename='about.js') }}"></script>
+
+
+    <div class="info_box">
+        <div class="left_column">
+            <h1 style="text-decoration: underline;">Follow us</h1>
+            <div class="social_media">
+                <img src="{{ url_for('static', filename='images/twitter.jpeg') }} " height = "100" width = "100">
+                <img src="{{ url_for('static', filename='images/instagram.jpg') }} " height = "100" width = "100">
+                <img src="{{ url_for('static', filename='images/facebook.jpeg') }} " height = "100" width = "100">
+            </div>
+        </div>
+
+        <div class="right_column">
+            <h2 style="font-family: 'Brush Script MT', cursive; text-decoration: underline; font-size: 3rem;">M.K</h2>
+            <div class="contact_info">
+                <p style="text-decoration: underline;">Ontario, CA 91764</p>
+                <p style="text-decoration: underline;">(951)666-4200</p>
+                <p style="text-decoration: underline;">MK@gmail.com</p>
+                <p style="margin-top: 10px; font-weight:bold;">Sunday - Thursday:</p>
+                <p>11:00 AM - 10:00 PM</p>
+                <p style="margin-top: 10px; font-weight:bold;">Friday - Saturday:</p>
+                <p>11:00 AM - 11:00 PM</p>
+            </div>
         </div>
     </div>
-    <div class="content">
-        <div class="spell">
-            <h2>Graham Cracker Cheesecake</h2>
-            <p>Who doesn't love a good cake? Cheesecakes are a classic and popular favorite of all time for anyone and anywhere. Some people argue it can be to sweet, but Chef Q has created the perfect balance of sweetness between milky, delicate cheese and crisp, cinnamon graham crackers.</p>
-            <img src="{{url_for('static', filename = 'images/cheesecake.jpeg')}}" height="300" width="400">
-        </div>
-    </div>
-    <footer>
-        <p>&copy; Malevolent Kitchen</p>
-    </footer>
 </body>
 </html>

@@ -82,7 +82,7 @@
                 background: linear-gradient(177.9deg, rgb(58, 62, 88) 3.6%, rgb(119, 127, 148) 105.8%);
                 color: white;
                 width: 400px;
-                height: 300px;
+                height: 350px;
                 margin: auto;
                 display: flex;
                 padding: 25px;
@@ -154,9 +154,18 @@
 
             .submit_button{
                 width:75px;
-                height:50px;
+                height:30px;
                 background: linear-gradient(to bottom, rgba(255,255,255,0.15) 0%, rgba(0,0,0,0.15) 100%), radial-gradient(at top center, rgba(255,255,255,0.40) 0%, rgba(0,0,0,0.40) 120%) #989898;
                 margin-left: 170px;
+            }
+
+            .scheduler {
+                padding:10px;
+            }
+            
+            .guest_counter{
+                align-justify:center;
+                text-align:center;
             }
 
         </style>
@@ -198,11 +207,72 @@
                         <input type="text" placeholder="optional" class="transparent-background" id="input_email" name="email">
                     </div>
                 </div>
+
+                <div class="guest_counter">
+                    <label for="num_guests">Table for:</label>
+                    <select id="num_guests" name="num_guests">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                        <option value="11">11</option>
+                        <option value="12">12</option>
+                    </select>
+                </div>
+
+                <div class="scheduler">
+                    <label for="day"> Select Day:</label>
+                    <select id="day" name="day"> 
+                        <option value="Sunday">Sunday</option>
+                        <option value="Monday">Monday</option>
+                        <option value="Tuesday">Tuesday</option>
+                        <option value="Wednesday">Wednesday</option>
+                        <option value="Thursday">Thursday</option>
+                        <option value="Friday">Friday</option>
+                        <option value="Saturday">Saturday</option>
+                    </select>
+
+                    <label for="time">Select Time:</label>
+                    <select id="time" name="time">
+                        <option value="11:00 AM">11:00 AM</option>
+                        <option value="11:30 AM">11:30 AM</option>
+                        <option value="12:00 AM">12:00 AM</option>
+                        <option value="12:30 AM">12:30 AM</option>
+                        <option value="01:00 PM">01:00 PM</option>
+                        <option value="01:30 PM">01:30 PM</option>
+                        <option value="02:00 PM">02:00 PM</option>
+                        <option value="02:30 PM">02:30 PM</option>
+                        <option value="03:00 PM">03:00 PM</option>
+                        <option value="03:30 PM">03:30 PM</option>
+                        <option value="04:00 PM">04:00 PM</option>
+                        <option value="04:30 PM">04:30 PM</option>
+                        <option value="05:00 PM">05:00 PM</option>
+                        <option value="06:00 PM">06:00 PM</option>
+                        <option value="06:30 PM">06:30 PM</option>
+                        <option value="07:00 PM">07:00 PM</option>
+                        <option value="07:30 PM">07:30 PM</option>
+                        <option value="08:00 PM">08:00 PM</option>
+                        <option value="08:30 PM">08:30 PM</option>
+                        <option value="09:00 PM">09:00 PM</option>
+                        <option value="09:30 PM">09:30 PM</option>
+                        <option value="10:00 PM">10:00 PM</option>
+                        <option value="10:30 PM">10:30 PM</option>
+                        <option value="11:00 PM">11:00 PM</option>
+                    </select>
+                </div>
+
+
                 <button class="submit_button" onclick="submitForm()"> Sumbit</button>
             </div>
         </form>
 
-        <script src="{{ url_for('static', filename='reserve.js') }}"></script>
+        <script src="{{ url_for('static', filename='reservations.js') }}"></script>
 
         <div class="info_box">
 

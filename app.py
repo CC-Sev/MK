@@ -1,6 +1,12 @@
 from flask import Flask, render_template, send_file, request, redirect, url_for, jsonify
 from io import BytesIO
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy import Column, Integer, DateTime, ForeignKey
+from sqlalchemy.orm import relationship
+from datetime import datetime
+from pytz import timezone, utc
+from tzlocal import get_localzone
+from zoneinfo import ZoneInfo
 
 app = Flask(__name__, static_folder="static", template_folder="templates")
 
@@ -15,9 +21,20 @@ class Customer(db.Model):
     name = db.Column(db.String(255))
     email = db.Column(db.String(255))
     phone_number = db.Column(db.String(20))
+    reservations = relationship('Reservations', backref='customer', lazy='dynamic')
     
     def __repr__(self):
         return '<Customer %r>' % self.name
+    
+class Reservations(db.Model):
+    __tablename__ = 'reservations'
+    reservation_id = db.Column(db.Integer, primary_key=True)
+    customer_id = db.Column(db.Integer, db.ForeignKey('customers.customer_id'))
+    reservation_datetime = db.Column(db.DateTime)
+    num_guests = db.Column(db.Integer)
+    
+    def __repr__(self):
+        return '<Reservation %r>' % self.reservation_id
 
 class Hotpot(db.Model):
     __tablename__ = 'hot_pot'
@@ -114,7 +131,7 @@ def food():
                            noodle_items=noodle_items,
                            dessert_items=dessert_items)
 
-@app.route('/home')
+@app.route('/')
 def home():
     return render_template('home.html')
 
@@ -153,7 +170,7 @@ def order():
     return render_template('order.html',
                            rice_items=rice_items)
 
-@app.route('/reserve')
+@app.route('/reserve', methods=['GET'])
 def reserve():
     return render_template('reserve.html')
 
@@ -161,26 +178,41 @@ def reserve():
 def reserve_post():
     # Get form data from the request
     name = request.form.get('name')
-    phone = request.form.get('phone_number')  # Corrected attribute name
+    phone = request.form.get('phone_number')
     email = request.form.get('email')
+    day = request.form.get('day')
+    time = request.form.get('time')
+    guests = request.form.get('num_guests')
 
     print(f"Received form data: Name: {name}, Phone: {phone}, Email: {email}")
 
     # Insert form data into the 'customers' table
-    customer = Customer(name=name, phone_number=phone, email=email)  # Corrected attribute name
+    customer = Customer(name=name, phone_number=phone, email=email)
     db.session.add(customer)
     db.session.commit()
 
     print("Customer inserted successfully!")
+    
+    customer_id = customer.customer_id
+    print(f"Customer_id: {customer_id}")
+    
+    # Create datetime object and localize to America/Los_Angeles timezone
+    datetime_str = f"{day} {time}"
+    tz = ZoneInfo("America/Los_Angeles")
+    naive_dt = datetime.strptime(datetime_str, '%A %I:%M %p')
+    localized_dt = naive_dt.replace(tzinfo=tz)
 
-    # Optionally, you can return a response to the user indicating success
+    # Convert the localized datetime to UTC
+    utc_dt = localized_dt.astimezone(ZoneInfo("UTC"))
+    print(f"UTC Time: {utc_dt}")
+
+    # Insert reservation data into the 'reservations' table
+    reservation = Reservations(customer_id=customer_id, reservation_datetime=utc_dt, num_guests=guests)
+    db.session.add(reservation)
+    db.session.commit()
+    print("Reservation inserted successfully!")
+
     return redirect(url_for('reserve'))
-
-
-@app.route('/reserve_success')
-def reserve_success():
-    return render_template('reserve_success.html')
-
  
 if __name__ == '__main__':
     app.run(debug=True)
