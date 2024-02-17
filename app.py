@@ -4,9 +4,6 @@ from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import Column, Integer, DateTime, ForeignKey
 from sqlalchemy.orm import relationship
 from datetime import datetime
-from pytz import timezone, utc
-from tzlocal import get_localzone
-from zoneinfo import ZoneInfo
 
 app = Flask(__name__, static_folder="static", template_folder="templates")
 
@@ -30,8 +27,9 @@ class Reservations(db.Model):
     __tablename__ = 'reservations'
     reservation_id = db.Column(db.Integer, primary_key=True)
     customer_id = db.Column(db.Integer, db.ForeignKey('customers.customer_id'))
-    reservation_datetime = db.Column(db.DateTime)
     num_guests = db.Column(db.Integer)
+    day = db.Column(db.String(20))
+    time = db.Column(db.String(20))
     
     def __repr__(self):
         return '<Reservation %r>' % self.reservation_id
@@ -176,7 +174,7 @@ def reserve():
 
 @app.route('/reserve_post', methods=['POST'])
 def reserve_post():
-    # Get form data from the request
+    
     name = request.form.get('name')
     phone = request.form.get('phone_number')
     email = request.form.get('email')
@@ -186,7 +184,7 @@ def reserve_post():
 
     print(f"Received form data: Name: {name}, Phone: {phone}, Email: {email}")
 
-    # Insert form data into the 'customers' table
+    
     customer = Customer(name=name, phone_number=phone, email=email)
     db.session.add(customer)
     db.session.commit()
@@ -196,23 +194,16 @@ def reserve_post():
     customer_id = customer.customer_id
     print(f"Customer_id: {customer_id}")
     
-    # Create datetime object and localize to America/Los_Angeles timezone
-    datetime_str = f"{day} {time}"
-    tz = ZoneInfo("America/Los_Angeles")
-    naive_dt = datetime.strptime(datetime_str, '%A %I:%M %p')
-    localized_dt = naive_dt.replace(tzinfo=tz)
-
-    # Convert the localized datetime to UTC
-    utc_dt = localized_dt.astimezone(ZoneInfo("UTC"))
-    print(f"UTC Time: {utc_dt}")
-
-    # Insert reservation data into the 'reservations' table
-    reservation = Reservations(customer_id=customer_id, reservation_datetime=utc_dt, num_guests=guests)
+    reservation = Reservations(customer_id=customer_id, day=day, time=time, num_guests=guests)
     db.session.add(reservation)
     db.session.commit()
     print("Reservation inserted successfully!")
 
     return redirect(url_for('reserve'))
+
+@app.route('/test')
+def test():
+    return render_template('test.html')
  
 if __name__ == '__main__':
     app.run(debug=True)

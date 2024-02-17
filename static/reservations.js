@@ -8,7 +8,6 @@ function submitForm() {
     var time = document.getElementsById("time").value;
     var datetime = day + " " + time;
 
-    // Create a JavaScript object with the form data
     var formData = {
         name: name,
         phone_number: phone,
@@ -18,7 +17,6 @@ function submitForm() {
         reservation_datetime: datetime
     };
 
-    // Convert the JavaScript object to a JSON string
     var jsonData = JSON.stringify(formData);
 
     // AJAX POST request
@@ -39,7 +37,6 @@ function submitForm() {
             }
         }
     };
-    // Send the JSON data in the request body
-    print("Form jsonData: " + jsonData)
+    
     xhr.send(jsonData);
 }
