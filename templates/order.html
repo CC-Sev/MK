@@ -279,7 +279,50 @@
                 cursor: pointer;
                 margin-left: 10px;
             }
+
+            .drink_box {
+                width: auto;
+                margin-bottom: 20px;
+                margin-left: 140px;
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: flex-start;
+            }
             
+            .drink_item {
+                width: calc(30% - 20px); /* 30% width with margins subtracted */
+                height: 150px;
+                margin: 0 10px 20px; /* Adjust margins as needed */
+                background: linear-gradient(to bottom, rgba(255,255,255,0.15) 0%, rgba(0,0,0,0.15) 100%), radial-gradient(at top center, rgba(255,255,255,0.40) 0%, rgba(0,0,0,0.40) 120%) #989898;
+                border-radius: 25px;
+                display: flex;
+                flex-direction: row;
+            }
+            
+            .drink_item img {
+                width: 30%;
+                height: auto;
+                border-top-right-radius: 25px;
+                border-bottom-right-radius: 25px;
+                object-fit: cover; 
+            }
+
+            .drink_name {
+                font-size: 1.25rem;
+                font-family: "Brush Script MT", cursive, bold;
+                white-space: nowrap; /* Prevent text from wrapping */
+                max-width: 200px;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                margin-top: 10px;
+            }
+
+            #white-box .drink_name{
+                width: 100%;
+                overflow: visible;
+                text-overflow: initial;
+                white-space: normal;
+            }
 
         </style>
     </head>
@@ -307,6 +350,50 @@
             <a href="{{url_for('reserve')}}">Reserve</a>
         </nav>
 
+        <h1 style="margin-left: 150px;">Hot Pot</h1>
+        {% if hotpot_items %}
+            <div class="food_box">
+                {% for hotpot in hotpot_items %}
+                    <div class="food_item" onclick="showBox('{{ hotpot.name }}', '{{ hotpot.description }}', '{{ hotpot.price }}', '{{ url_for('get_hotpot_image', item_id=hotpot.id) }}')">
+                        <div class="details">
+                            <div class="food_name">
+                                {{ hotpot.name }}
+                            </div>
+                            <div class="description-price">
+                                <p class="description">{{ hotpot.description }}</p>
+                                <p class="price">${{ hotpot.price }}</p>
+                            </div>
+                        </div>
+                        <img src="{{ url_for('get_hotpot_image', item_id=hotpot.id) }}">
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p>No rice items available.</p>
+        {% endif %}
+
+        <h1 style="margin-left: 150px;">Noodles</h1>
+        {% if noodle_items %}
+            <div class="food_box">
+                {% for noodle in noodle_items %}
+                    <div class="food_item" onclick="showBox('{{ noodle.name }}', '{{ noodle.description }}', '{{ noodle.price }}', '{{ url_for('get_noodle_image', item_id=noodle.id) }}')">
+                        <div class="details">
+                            <div class="food_name">
+                                {{ noodle.name }}
+                            </div>
+                            <div class="description-price">
+                                <p class="description">{{ noodle.description }}</p>
+                                <p class="price">${{ noodle.price }}</p>
+                            </div>
+                        </div>
+                        <img src="{{ url_for('get_noodle_image', item_id=noodle.id) }}">
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p>No noodle items available.</p>
+        {% endif %}
+
         <h1 style="margin-left: 150px;">Rice</h1>
         {% if rice_items %}
             <div class="food_box">
@@ -329,6 +416,95 @@
             <p>No rice items available.</p>
         {% endif %}
 
+        <h1 style="margin-left: 150px;">Dessert</h1>
+        {% if dessert_items %}
+            <div class="food_box">
+                {% for dessert in dessert_items %}
+                    <div class="food_item" onclick = "showBox('{{ dessert.name }}', '{{ dessert.description }}', '{{ dessert.price }}', '{{ url_for('get_dessert_image', item_id=dessert.id) }}')">
+                        <div class="details">
+                            <div class="food_name">
+                                {{ dessert.name }}
+                            </div>
+                            <div class="description-price">
+                                <div class="description">{{ dessert.description }}</div>
+                                <div class="price">{{ dessert.price }}</div>
+                            </div>
+                        </div>
+                        <img src=" {{ url_for('get_dessert_image', item_id=dessert.id) }}">
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <div>
+                <p> No dessert items available. </p>
+            </div>
+        {% endif %}
+
+        <h1 style="margin-left: 150px;">Signture Cocktails</h1>
+        {% if cocktail_items %}
+            <div class="drink_box">
+                {% for cocktail in cocktail_items %}
+                    <div class="drink_item" onclick="showBox('{{ cocktail.name }}', '{{ cocktail.description }}', '{{ cocktail.price }}', '{{ url_for('get_cocktail_image', item_id=cocktail.id) }}')">
+                        <div class="details">
+                            <div class="drink_name">
+                                {{ cocktail.name }}
+                            </div>
+                            <div class="description-price">
+                                <p class="description">{{ cocktail.description }}</p>
+                                <p class="price">${{ cocktail.price }}</p>
+                            </div>
+                        </div>
+                        <img src="{{ url_for('get_cocktail_image', item_id=cocktail.id) }}">
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p>No cocktail items available.</p>
+        {% endif %}
+
+        <h1 style="margin-left: 150px;">Sake</h1>
+        {% if sake_items %}
+            <div class="drink_box">
+                {% for sake in sake_items %}
+                    <div class="drink_item" onclick="showBox('{{ sake.name }}', '{{ sake.description }}', '{{ sake.price }}', '{{ url_for('get_sake_image', item_id=sake.id) }}')">
+                        <div class="details">
+                            <div class="drink_name">
+                                {{ sake.name }}
+                            </div>
+                            <div class="description-price">
+                                <p class="description">{{ sake.description }}</p>
+                                <p class="price">${{ sake.price }}</p>
+                            </div>
+                        </div>
+                        <img src="{{ url_for('get_sake_image', item_id=sake.id) }}">
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p>No non_alcohol items available.</p>
+        {% endif %}
+
+        <h1 style="margin-left: 150px;">Non-Alcohol</h1>
+        {% if non_alcohol_items %}
+            <div class="drink_box">
+                {% for non_alcohol in non_alcohol_items %}
+                    <div class="drink_item" onclick="showBox('{{ non_alcohol.name }}', '{{ non_alcohol.description }}', '{{ non_alcohol.price }}', '{{ url_for('get_non_alcohol_image', item_id=non_alcohol.id) }}')">
+                        <div class="details">
+                            <div class="drink_name">
+                                {{ non_alcohol.name }}
+                            </div>
+                            <div class="description-price">
+                                <p class="description">{{ non_alcohol.description or ''}}</p>
+                                <p class="price">${{ non_alcohol.price }}</p>
+                            </div>
+                        </div>
+                        <img src="{{ url_for('get_non_alcohol_image', item_id=non_alcohol.id) }}">
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p>No non_alcohol items available.</p>
+        {% endif %}
     
         <div id="overlay" click="hideBox(event)">
             <div id="white-box">

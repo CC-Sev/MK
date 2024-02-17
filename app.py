@@ -92,9 +92,6 @@ class Non_alcohol(db.Model):
     price = db.Column(db.Numeric(precision = 10, scale = 2))
     image_id = db.Column(db.LargeBinary)
     
-
-
-# Route to get noodle image
 @app.route('/get_hotpot_image/<int:item_id>')
 def get_hotpot_image(item_id):
     hotpot_items = Hotpot.query.get_or_404(item_id)
@@ -116,7 +113,6 @@ def get_dessert_image(item_id):
     dessert_item = Dessert.query.get_or_404(item_id)
     return send_file(BytesIO(dessert_item.image_id), mimetype = 'image/jpeg')
 
-# Route to display food items
 @app.route('/food')
 def food():
     hotpot_items = Hotpot.query.all()
@@ -164,9 +160,21 @@ def about():
 
 @app.route('/order')
 def order():
+    hotpot_items = Hotpot.query.all()
+    noodle_items = Noodle.query.all()
     rice_items = Rice.query.all()
+    dessert_items = Dessert.query.all()
+    cocktail_items = Cocktail.query.all()
+    sake_items = Sake.query.all()
+    non_alcohol_items = Non_alcohol.query.all()
     return render_template('order.html',
-                           rice_items=rice_items)
+                           hotpot_items=hotpot_items,
+                           noodle_items=noodle_items,
+                           rice_items=rice_items,
+                           dessert_items=dessert_items,
+                           cocktail_items=cocktail_items,
+                           sake_items=sake_items,
+                           non_alcohol_items=non_alcohol_items)
 
 @app.route('/reserve', methods=['GET'])
 def reserve():
